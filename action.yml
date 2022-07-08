@@ -1,0 +1,26 @@
+name: "gitstream"
+description: "Check your Node application for vulnerabilties using gitstream"
+author: "Ofer"
+branding:
+  icon: "alert-triangle"
+  color: "yellow"
+inputs:
+  command:
+    description: "Which command to run, defaults to parse"
+    default: parse
+  args:
+    description: "Additional arguments to pass"
+  json:
+    description: "Output a checks.json file with results if running the test command"
+    default: true
+runs:
+  using: "docker"
+  image: "docker://gitstream/parser:latest"
+  env:
+    FORCE_COLOR: 2
+    SNYK_INTEGRATION_NAME: GITHUB_ACTIONS
+    SNYK_INTEGRATION_VERSION: node
+  args:
+  - gitstream
+  - ${{ inputs.command }}
+  - ${{ inputs.args }} 
