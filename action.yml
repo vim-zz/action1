@@ -8,19 +8,10 @@ inputs:
   command:
     description: "Which command to run, defaults to parse"
     default: parse
-  args:
-    description: "Additional arguments to pass"
-  json:
-    description: "Output a checks.json file with results if running the test command"
-    default: true
+  lanes:
+    description: "Lanes"
 runs:
   using: "docker"
-  image: "docker://gitstream/parser:latest"
-  env:
-    FORCE_COLOR: 2
-    SNYK_INTEGRATION_NAME: GITHUB_ACTIONS
-    SNYK_INTEGRATION_VERSION: node
+  image: "docker://gitstream/parser:0.1.7"
   args:
-  - gitstream
-  - ${{ inputs.command }}
-  - ${{ inputs.args }} 
+    - ${{ inputs.lanes }}
