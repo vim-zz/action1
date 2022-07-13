@@ -5,13 +5,16 @@ branding:
   icon: "alert-triangle"
   color: "yellow"
 inputs:
-  command:
-    description: "Which command to run, defaults to parse"
-    default: parse
-  lanes:
-    description: "Lanes"
+  repo:
+    description: "The Org/Repo"
+  branch:
+    description: "Head branch"
+  use_cache:
+    description: "Use cached checks for lanes"
 runs:
   using: "docker"
-  image: "docker://gitstream/parser:0.1.7"
+  image: "docker://gitstream/parser:0.1.12"
   args:
-    - ${{ inputs.lanes }}
+    - ${{ inputs.repo }}
+    - ${{ inputs.branch }}
+    - ${{ inputs.use_cache }}
